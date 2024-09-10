@@ -106,7 +106,7 @@
     (reset! initialized true)
     (swap! data/tool-state assoc :opts opts)
     #_(register-exception-handler)
-    (if (re-frame.trace/is-trace-enabled?)
+    (if (and (re-frame.trace/is-trace-enabled?) (get opts :events? true))
       (do
         (patch-reagent!)
         (re-frame.trace/register-trace-cb :re-frisk-trace trace-cb))
